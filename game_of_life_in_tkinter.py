@@ -1,5 +1,7 @@
 # Conway's Game of Life (matplotlib) (without clear ax)(embedded in tkinter)
 import copy
+
+import matplotlib.pyplot as plt
 import numpy as np
 import random
 from matplotlib.figure import Figure
@@ -86,9 +88,9 @@ def draw_cell():
     bbox = fig.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
     width = bbox.width * fig.dpi
     height = bbox.height * fig.dpi
-    print((width, height))
+    # print((width, height))
     x_size = width / (x_max - x_min)
-    print(x_size)
+    # print(x_size)
     # draw cells
     x.clear()
     y.clear()
@@ -98,9 +100,31 @@ def draw_cell():
             if cells0[i][j] == 1:
                 y.append(i + cells_offset)
                 x.append(j + cells_offset)
-                s.append(x_size ** 2 * 0.08)
+                s.append(x_size ** 2 * 0.05)
     scat.set_offsets(np.column_stack([x, y]))
     scat.set_sizes(s)
+
+
+def mouse_motion(event):
+    global cells0
+    if event.dblclick == 1:
+        # print("double click")
+        pass
+    elif event.button == 1:
+        # print("left click")
+        print(event.xdata, event.ydata)
+        if str(event.xdata) != "None" and str(event.ydata) != "None":
+            mouse_col = int(event.xdata)
+            mouse_row = int(event.ydata)
+            # print(mouse_col, mouse_row)
+            if cells0[mouse_row][mouse_col] == 0:
+                cells0[mouse_row][mouse_col] = 1
+            else:
+                cells0[mouse_row][mouse_col] = 0
+            draw_cell()
+    elif event.button == 3:
+        # print("right click")
+        pass
 
 
 def on_change_window(e):
@@ -172,6 +196,7 @@ root = tk.Tk()
 root.title("Sample3")
 canvas = FigureCanvasTkAgg(fig, root)
 canvas.get_tk_widget().pack(expand=True, fill='both')
+canvas.mpl_connect('button_press_event', mouse_motion)
 
 toolbar = NavigationToolbar2Tk(canvas, root)
 canvas.get_tk_widget().pack()

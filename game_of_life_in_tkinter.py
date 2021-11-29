@@ -112,7 +112,7 @@ def mouse_motion(event):
         pass
     elif event.button == 1:
         # print("left click")
-        print(event.xdata, event.ydata)
+        # print(event.xdata, event.ydata)
         if str(event.xdata) != "None" and str(event.ydata) != "None":
             mouse_col = int(event.xdata)
             mouse_row = int(event.ydata)

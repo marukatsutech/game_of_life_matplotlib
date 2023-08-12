@@ -193,7 +193,7 @@ draw_cell()
 
 # Tkinter
 root = tk.Tk()
-root.title("Sample3")
+root.title("Conway's Game of Life")
 canvas = FigureCanvasTkAgg(fig, root)
 canvas.get_tk_widget().pack(expand=True, fill='both')
 canvas.mpl_connect('button_press_event', mouse_motion)

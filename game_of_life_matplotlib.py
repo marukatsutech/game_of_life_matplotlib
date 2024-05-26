@@ -112,5 +112,5 @@ ax = fig.add_subplot(111)
 
 # Draw animation
 set_axis()
-anim = animation.FuncAnimation(fig, update, interval=500)
+anim = animation.FuncAnimation(fig, update, interval=500, save_count=100)
 plt.show()

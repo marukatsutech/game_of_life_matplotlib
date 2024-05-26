@@ -111,5 +111,5 @@ scat = plt.scatter(x, y, marker='s', s=6)
 tx_step = ax.text(x_min, y_max * 0.95, "Step=" + str(0))
 
 # Draw animation
-anim = animation.FuncAnimation(fig, update, interval=100)
+anim = animation.FuncAnimation(fig, update, interval=100, save_count=100)
 plt.show()
